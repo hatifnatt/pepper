@@ -12,6 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y --no-install-recommends \
         'build-essential=*' \
         'python3-pip=*' \
+        'python3-setuptools=*' \
         'python3-simplejson=*' \
         'git=*' \
         'ruby=*' \
@@ -35,6 +36,7 @@ COPY ./ /tmp/fpm
 RUN fpm -s python -t deb \
     --python-bin python3 \
     --python-package-name-prefix python3 \
+    --iteration "deb${DEBIAN_VERSION}" \
     --verbose \
     .
 
